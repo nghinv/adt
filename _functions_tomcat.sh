@@ -396,6 +396,9 @@ do_configure_tomcat_server() {
     do_ufw_open_port ${DEPLOYMENT_CRASH_SSH_PORT} "CRaSH SSH" ${ADT_DEV_MODE}
   fi
 
+  if [ -f ${DEPLOYMENT_DIR}/webapps/jmxtrans-addon*.war ]; then
+    env_var "DEPLOYMENT_JMXTRANS_ADDON_ENABLED" true
+  fi
 }
 
 # #############################################################################

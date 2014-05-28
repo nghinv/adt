@@ -68,20 +68,17 @@ if ${DEPLOYMENT_SKIP_REGISTER}; then
 fi
 # Skip account creation form
 CATALINA_OPTS="${CATALINA_OPTS} -Daccountsetup.skip=${EXO_SKIP_ACCOUNT_SETUP}"
-CATALINA_OPTS="${CATALINA_OPTS} -Dexo.accountsetup.skip=${EXO_SKIP_ACCOUNT_SETUP}"
-# PLF 4.1
-# Email
-[ ! -z ${EXO_DEPLOYMENT_URL} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.base.url=${EXO_DEPLOYMENT_URL}"
-[ ! -z ${EXO_EMAIL_FROM} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.email.smtp.from=${EXO_EMAIL_FROM}"
-[ ! -z ${EXO_EMAIL_SMTP_HOST} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.email.smtp.host=${EXO_EMAIL_SMTP_HOST}"
-[ ! -z ${EXO_EMAIL_SMTP_PORT} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.email.smtp.port=${EXO_EMAIL_SMTP_PORT}"
-[ ! -z ${EXO_EMAIL_SMTP_USERNAME} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.email.smtp.username=${EXO_EMAIL_SMTP_USERNAME}"
-[ ! -z ${EXO_EMAIL_SMTP_PASSWORD} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.email.smtp.password=${EXO_EMAIL_SMTP_PASSWORD}"
-[ ! -z ${EXO_EMAIL_SMTP_STARTTLS_ENABLE} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.email.smtp.starttls.enable=${EXO_EMAIL_SMTP_STARTTLS_ENABLE}"
-[ ! -z ${EXO_EMAIL_SMTP_AUTH} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.email.smtp.auth=${EXO_EMAIL_SMTP_AUTH}"
-[ ! -z ${EXO_EMAIL_SMTP_SOCKET_FACTORY_PORT} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.email.smtp.socketFactory.port=${EXO_EMAIL_SMTP_SOCKET_FACTORY_PORT}"
-[ ! -z ${EXO_EMAIL_SMTP_SOCKET_FACTORY_CLASS} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.email.smtp.socketFactory.class=${EXO_EMAIL_SMTP_SOCKET_FACTORY_CLASS}"
-# JOD
-[ ! -z ${EXO_JODCONVERTER_ENABLE} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.jodconverter.enable=${EXO_JODCONVERTER_ENABLE}"
-[ ! -z ${EXO_JODCONVERTER_PORTS} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.jodconverter.portnumbers=${EXO_JODCONVERTER_PORTS}"
-[ ! -z ${EXO_JODCONVERTER_OFFICEHOME} ] && CATALINA_OPTS="${CATALINA_OPTS} -Dexo.jodconverter.officehome=\"${EXO_JODCONVERTER_OFFICEHOME}\""
+# JMXTrans Addon
+if ${DEPLOYMENT_JMXTRANS_ADDON_ENABLED}; then
+  CATALINA_OPTS="${CATALINA_OPTS} -Dgraphite.host=${EXO_JMXTRANS_ADDON_HOST}"
+  CATALINA_OPTS="${CATALINA_OPTS} -Dgraphite.port=${EXO_JMXTRANS_ADDON_PORT}"
+  CATALINA_OPTS="${CATALINA_OPTS} -Dgraphite.namePrefix=acceptance.${EXO_JMXTRANS_CATEGORY}."
+  CATALINA_OPTS="${CATALINA_OPTS} -Dgraphite.enabled=true"
+  CATALINA_OPTS="${CATALINA_OPTS} -Dgraphite.pickle.enabled=false"
+
+  CATALINA_OPTS="${CATALINA_OPTS} -Dgraphite.queryIntervalInSeconds=15"
+  CATALINA_OPTS="${CATALINA_OPTS} -Dgraphite.queryThreads=15"
+  CATALINA_OPTS="${CATALINA_OPTS} -Dgraphite.exportIntervalInSeconds=30"
+  CATALINA_OPTS="${CATALINA_OPTS} -Dgraphite.exportBatchSize=50"
+  CATALINA_OPTS="${CATALINA_OPTS} -Dgraphite.numExportThreads=5"
+fi

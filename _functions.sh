@@ -247,6 +247,10 @@ initialize_product_settings() {
       configurable_env_var "REPOSITORY_PASSWORD" ""
 
       env_var "DEPLOYMENT_CRASH_ENABLED" false
+      
+      env_var "DEPLOYMENT_JMXTRANS_ADDON_ENABLED" false
+      configurable_env_var "DEPLOYMENT_JMXTRANS_ADDON_HOST" "graphite.exoplatform.org"
+      configurable_env_var "DEPLOYMENT_JMXTRANS_ADDON_PORT" 2003
 
       configurable_env_var "DEPLOYMENT_ES_ENABLED" true
       configurable_env_var "DEPLOYMENT_ES_EMBEDDED" true
@@ -658,7 +662,8 @@ initialize_product_settings() {
           exit 1
         fi
       fi
-
+      # JMXTrans Addon configuration : computes the storage path of data in GRAPHITE
+      env_var "DEPLOYMENT_JMXTRANS_CATEGORY" "${PLF_BRANCH//./_}.${PRODUCT_NAME//./_}.${PRODUCT_VERSION//./_}"
     ;;
     list | start-all | stop-all | restart-all | undeploy-all)
     # Nothing to do

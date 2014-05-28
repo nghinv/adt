@@ -2,7 +2,7 @@
 
 # #############################################################################
 # Initialize
-# #############################################################################                                              
+# #############################################################################
 SCRIPT_NAME="${0##*/}"
 SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -130,6 +130,7 @@ while getopts "n:v:a:C:d:p:ci:l:h" OPTION; do
   esac
 done
 
+export DEPLOYMENT_JMXTRANS_ADDON_HOST="graphite.exoplatform.local"
 ${SCRIPT_DIR}/adt.sh $ACTION
 
 exit 0
