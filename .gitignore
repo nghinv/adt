@@ -8,3 +8,4 @@ downloads
 conf
 sources
 .java-version
+_docker/**/*.org

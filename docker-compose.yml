@@ -1,0 +1,7 @@
+adt_server_web:
+   build: _docker/.
+   container_name: adt-web-server
+   ports:
+    - "80:80"
+   volumes:
+    - .:/var/adt

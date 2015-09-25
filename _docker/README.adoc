@@ -1,0 +1,38 @@
+= Getting Started
+
+== Docker Machine
+
+[source, bash]
+--
+$ docker-machine create -d virtualbox exodev-swf
+$ eval $(docker-machine env exodev-swf)
+--
+
+To check that the conf is ok:
+[source, bash]
+----
+docker-machine inspect exodev-swf
+----
+
+== Clone, copy and run
+
+. Clone adt repo
+
+[source, bash]
+--
+$ git clone git@github.com:exoplatform/adt.git
+$ cd adt
+--
+
+. Copy samples files (*org) from acceptance server to *adt/_docker/resources*
+. Run the container
+
+[source, bash]
+--
+$ docker-compose up -d
+$ open http://$(docker-machine ip exodev-swf)
+--
+
+. Update PHP files
+
+Then you can update HTML/CSS/PHP files in *var/www/* and refresh your browser!
