@@ -1,7 +1,10 @@
 adt_server_web:
-   build: _docker/.
+   build: _docker/frontend/.
    container_name: adt-web-server
    ports:
     - "80:80"
    volumes:
     - .:/var/adt
+    - ./sources:/sources
+    - ./_docker/frontend/resources/datas-test/adt:/conf/adt
+    - ./_docker/frontend/resources/datas-test/features:/conf/features

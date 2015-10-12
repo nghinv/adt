@@ -24,7 +24,9 @@ $ git clone git@github.com:exoplatform/adt.git
 $ cd adt
 --
 
- . Copy samples files (.org) from acceptance server to *adt/_docker/resources*
+ . Copy samples files from from acceptance server to:
+ .. *adt/_docker/resources/datas-test/adt*
+ .. *adt/_docker/resources/datas-test/features*
  . Run the container
 
 [source, bash]
