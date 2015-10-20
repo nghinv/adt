@@ -74,6 +74,7 @@ export EXO_LOGS_COLORIZED_CONSOLE=true
 # EXO_RECEIVER_GROUP_ID must be set
 [ -z $EXO_RECEIVER_GROUP_ID ] && EXO_RECEIVER_GROUP_ID="/community-email-receiver"
 # Elasticsearch Embedded
+<<<<<<< HEAD
 [ -z $EXO_ES_HTTP_PORT ] && EXO_ES_HTTP_PORT="${DEPLOYMENT_ES_HTTP_PORT}"
 [ -z $EXO_ES_PATH_DATA ] && EXO_ES_PATH_DATA="${DEPLOYMENT_ES_PATH_DATA}"
 # Configuration for cloud drive
