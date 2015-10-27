@@ -196,7 +196,7 @@ foreach ($all_instances as $plf_branch => $descriptor_arrays) {
                     }
                     if ( $database_icon != "none" ) {
                     ?> <img src="/images/<?= $database_icon ?>.png" witdh="8" height="8" alt="<?= $database_icon ?>"> <?php } ?> <?= $descriptor_array->DEPLOYMENT_DATABASE_VERSION ?>
-            </td>            
+            </td>
             <?php if (empty($descriptor_array->BRANCH_NAME) || strpos($descriptor_array->BRANCH_NAME, "translation") !== false) { ?>
                 <td class="col-center" colspan="4"></td>
             <?php } else { ?>

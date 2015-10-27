@@ -67,12 +67,13 @@ function cmpInstances($a, $b)
 }
 
 
-function append_data($url, $data)
+function append_data($url, $data, $headers)
 {
   $result = $data;
   $values = (array)json_decode(file_get_contents($url));
   while ($entry = current($values)) {
     $key = key($values);
+    $entry["DEPLOYMENT_SERVER"] = $headers;
     if (!array_key_exists($key, $data)) {
       $result[$key] = $entry;
     } else {
@@ -356,7 +357,9 @@ function getGlobalAcceptanceInstances()
     } else {
       $servers = explode(",", getenv('ACCEPTANCE_SERVERS'));
       foreach ($servers as $server) {
-        $instances = append_data($server . '/rest/local-instances.php', $instances);
+        $url = $server . '/rest/local-instances.php';
+        $headers = get_headers($url, 1);
+        $instances = append_data($url, $instances, $headers);
       }
     }
     // Instances will be cached for 2 min
