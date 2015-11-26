@@ -378,6 +378,8 @@ initialize_product_settings() {
         ;;
         plfcom)
           env_var PRODUCT_DESCRIPTION "Platform CE"
+          # Workaround to test staging Release
+          env_var ARTIFACT_REPO_GROUP "staging"
           env_var DEPLOYMENT_SERVER_SCRIPT "bin/catalina.sh"
           env_var PLF_BRANCH "${PRODUCT_BRANCH}"
           case "${PRODUCT_BRANCH}" in
@@ -422,7 +424,8 @@ initialize_product_settings() {
         ;;
         plfent|plfentdemo)
           env_var PRODUCT_DESCRIPTION "Platform EE"
-          env_var ARTIFACT_REPO_GROUP "private"
+          # Workaround to test staging Release
+          env_var ARTIFACT_REPO_GROUP "staging"
           env_var ARTIFACT_GROUPID "com.exoplatform.platform.distributions"
           env_var ARTIFACT_ARTIFACTID "plf-enterprise-tomcat-standalone"
           env_var DEPLOYMENT_SERVER_SCRIPT "bin/catalina.sh"
@@ -436,7 +439,8 @@ initialize_product_settings() {
         ;;
         plfenteap)
           env_var PRODUCT_DESCRIPTION "Platform EE"
-          env_var ARTIFACT_REPO_GROUP "private"
+          # Workaround to test staging Release
+          env_var ARTIFACT_REPO_GROUP "staging"
           env_var ARTIFACT_GROUPID "com.exoplatform.platform.distributions"
           env_var ARTIFACT_ARTIFACTID "plf-enterprise-jbosseap-standalone"
           env_var DEPLOYMENT_SERVER_SCRIPT "bin/standalone.sh"
