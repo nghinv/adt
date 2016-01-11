@@ -454,7 +454,8 @@ initialize_product_settings() {
         plfentrial)
           # Platform EE + chat, remote-edit, site-template, task, video
           env_var PRODUCT_DESCRIPTION "Platform EE Trial"
-          env_var ARTIFACT_REPO_GROUP "private"
+          # Workaround to test staging Release
+          env_var ARTIFACT_REPO_GROUP "staging"
           env_var ARTIFACT_GROUPID "com.exoplatform.platform.distributions"
           env_var ARTIFACT_ARTIFACTID "plf-enterprise-trial-tomcat-standalone"
           env_var ARTIFACT_CLASSIFIER "trial"
