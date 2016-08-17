@@ -2,7 +2,7 @@ FROM php:5.4-apache
 
 ENV ADT_DEV_MODE true
 
-RUN pecl install apcu-beta \
+RUN pecl install apcu-4.0.11 \
     && echo extension=apcu.so > /usr/local/etc/php/conf.d/apcu.ini
 
 # install git
