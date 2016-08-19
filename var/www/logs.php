@@ -58,21 +58,24 @@ checkCaches();
                         if (isAuthorizedToReadFile($log_type, $file_path) == true){
                     ?>
                         <div class="instructions">
-                          Download file : <a target="_blank" href="./logsDownload.php?type=instance&file=<?=$file_path?>"><?=$file_path?></a>
+                          Download file (<?php printf(human_filesize(filesize($file_path),0)); ?>) : <a target="_blank" href="./logsDownload.php?type=instance&file=<?=$file_path?>"><?=$file_path?></a>
                         </div>
                         <hr/>
                     <?php
-                          //readfile($_GET['file']);
-                          set_time_limit(0);
-                          $file = @fopen($file_path,"rb");
-                          while(!feof($file))
-                          {
-                            print(@fread($file, 1024*8));
-                            ob_flush();
-                            flush();
-                          }
+                            if (isFileTooLargeToBeViewed($file_path)){
+                                printf("<span style=\"color:red\"><strong>This file is too large to be viewed. Please download it.</strong></span>");
+                            } else {
+                                set_time_limit(0);
+                                $file = @fopen($file_path,"rb");
+                                while(!feof($file))
+                                {
+                                  print(@fread($file, 1024*8));
+                                  ob_flush();
+                                  flush();
+                                }
+                            }
                         } else {
-                          printf("Not authorized to read this file.");
+                            printf("<span style=\"color:red\"><strong>Not authorized to read this file.</strong></span>");
                         }
                    ?>
                 </div>

@@ -410,7 +410,8 @@ function checkCaches()
 * Check if the user is authorized to read and download the file.
 * Only Apache, Tomcat and JBoss logs can be viewed and downloaded.
 */
-function isAuthorizedToReadFile($log_type, $file_path){
+function isAuthorizedToReadFile($log_type, $file_path)
+{
   if (!empty($log_type) && !is_null($log_type)){
       if ($log_type == "instance" && (strpos($file_path, 'catalina.out') !== false
             || strpos($file_path, 'standalone.log') !== false)){
@@ -422,6 +423,28 @@ function isAuthorizedToReadFile($log_type, $file_path){
       return false;
   }
   return false;
+}
+
+/*
+* Check if a log file can be viewed in HTML page
+*/
+function isFileTooLargeToBeViewed($file_path)
+{
+  $limit = 10485760; // 10Mo (in bytes)
+  if (file_exists($file_path) && filesize($file_path) < $limit) {
+    return false;
+  }
+  return true;
+}
+
+/*
+* Display file size more readable for human.
+*/
+function human_filesize($bytes, $decimals = 2)
+{
+  $sz = 'BKMGTP';
+  $factor = floor((strlen($bytes) - 1) / 3);
+  return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor];
 }
 
 ?>

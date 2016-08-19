@@ -14,6 +14,6 @@ if (file_exists($file) && isAuthorizedToReadFile($type, $file)) {
     readfile($file);
     exit;
 } else {
-    printf("Not authorized to read this file.");
+    printf("<span style=\"color:red\"><strong>Not authorized to download this file.</strong></span>");
 }
 ?>
